@@ -1,0 +1,76 @@
+.navigation
+  .column.first <a href="/teams">Teams</a>
+  .column.last <a href="/matches">Matches</a>
+.clear
+
+%h1.bottom Dashboard
+.navigation
+  .column.first <a href="#your-matches">Your Matches</a>
+  .column.last <a href="#your-teams">Your Teams</a>
+.clear
+
+%h2#your-matches.bottom Your Matches
+%table.matches
+  %thead
+    %tr
+      %th.span-3 Date
+      %th.span-20 Teams
+      %th.span-1 Result
+  %tbody
+    %tr.won
+      %td= Time.now.to_date.to_s(:long)
+      %td
+        <a href="/teams/1-team-1">Team 1</a> - <a href="/teams/2-team-2">Team 2</a>
+      %td{ :style => 'text-align: right' } 2:1
+    %tr
+      %td{ :style => 'text-align: right' }= 1.ordinalize
+      %td
+        <a href="/players/4-player-4">Player 4</a>, <a href="/players/1-player-1">Player 1</a> vs
+        <a href="/players/5-player-5">Player 5</a>, <a href="/players/2-player-2">Player 2</a>
+      %td{ :style => 'text-align: right' } 6:3
+    %tr
+      %td{ :style => 'text-align: right' }= 2.ordinalize
+      %td
+        <a href="/players/4-player-4">Player 4</a>, <a href="/players/1-player-1">Player 1</a> vs
+        <a href="/players/5-player-5">Player 5</a>, <a href="/players/2-player-2">Player 2</a>
+      %td{ :style => 'text-align: right' } 4:6
+    %tr
+      %td{ :style => 'text-align: right' }= 3.ordinalize
+      %td
+        <a href="/players/4-player-4">Player 4</a>, <a href="/players/1-player-1">Player 1</a> vs
+        <a href="/players/5-player-5">Player 5</a>, <a href="/players/2-player-2">Player 2</a>
+      %td{ :style => 'text-align: right' } 6:2
+    %tr.lost
+      %td= Time.now.to_date.to_s(:long)
+      %td
+        <a href="/teams/4-team-4">Team 4</a> - <a href="/teams/3-team-3">Team 3</a>
+      %td{ :style => 'text-align: right' } 0:2
+    %tr
+      %td{ :style => 'text-align: right' }= 1.ordinalize
+      %td
+        <a href="/players/2-player-2">Player 2</a>, <a href="/players/1-player-1">Player 1</a> vs
+        <a href="/players/5-player-5">Player 5</a>, <a href="/players/4-player-4">Player 2</a>
+      %td{ :style => 'text-align: right' } 3:6
+    %tr
+      %td{ :style => 'text-align: right' }= 2.ordinalize
+      %td
+        <a href="/players/2-player-2">Player 2</a>, <a href="/players/1-player-1">Player 1</a> vs
+        <a href="/players/5-player-5">Player 5</a>, <a href="/players/4-player-4">Player 2</a>
+      %td{ :style => 'text-align: right' } 4:6
+
+%h2#your-teams.bottom Your Teams
+%table.teams
+  %thead
+    %tr
+      %th.span-8 Name
+      %th.span-16 Mates
+  %tbody
+    %tr.even
+      %td <a href="/teams/1-team-1">Team 1</a>
+      %td <a href="/players/4-player-4">Player 4</a>
+        
+    %tr.odd
+      %td <a href="/teams/4-team-4">Team 4</a>
+      %td
+        <a href="/players/2-player-2">Player 2</a>,
+        <a href="/players/3-player-3">Player 3</a>

@@ -1,0 +1,6 @@
+[submodule "vendor/misc/blueprint-css"]
+	path = vendor/misc/blueprint-css
+	url = git://github.com/joshuaclayton/blueprint-css.git
+[submodule "vendor/rails"]
+	path = vendor/rails
+	url = git://github.com/rails/rails.git
