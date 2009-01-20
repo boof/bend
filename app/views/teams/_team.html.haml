@@ -1,0 +1,3 @@
+- content_tag_for :tr, team, :class => eo(team_counter) do
+  %td= link_to team.name, ''
+  %td= team.players.sort_by { |p| p.name }.map! { |p| p != team.players.first ? link_to(p.name, '') : content_tag(:b, link_to(p.name, ''))} * ', '

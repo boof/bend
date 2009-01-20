@@ -1,21 +1,17 @@
-.navigation
-  .column.first <a href="/teams">Teams</a>
-  .column.last <a href="/matches">Matches</a>
-.clear
+.box
+  %h1.bottom Dashboard
 
-%h1.bottom Dashboard
-.navigation
-  .column.first <a href="#your-matches">Your Matches</a>
-  .column.last <a href="#your-teams">Your Teams</a>
-.clear
-
-%h2#your-matches.bottom Your Matches
+%h2.bottom
+  %div{ :style => 'float: right' }= link_to image_tag('add.png'), new_match_path
+  Your Matches
+  
 %table.matches
   %thead
     %tr
-      %th.span-3 Date
-      %th.span-20 Teams
-      %th.span-1 Result
+      %th.span-4 Date
+      %th.span-17 Match
+      %th.span-1 Scoring
+      %th.span-2
   %tbody
     %tr.won
       %td= Time.now.to_date.to_s(:long)
@@ -58,19 +54,13 @@
         <a href="/players/5-player-5">Player 5</a>, <a href="/players/4-player-4">Player 2</a>
       %td{ :style => 'text-align: right' } 4:6
 
-%h2#your-teams.bottom Your Teams
+%h2.bottom
+  %div{ :style => 'float: right' }= link_to image_tag('add.png'), ''
+  Your Teams
 %table.teams
   %thead
     %tr
       %th.span-8 Name
       %th.span-16 Mates
   %tbody
-    %tr.even
-      %td <a href="/teams/1-team-1">Team 1</a>
-      %td <a href="/players/4-player-4">Player 4</a>
-        
-    %tr.odd
-      %td <a href="/teams/4-team-4">Team 4</a>
-      %td
-        <a href="/players/2-player-2">Player 2</a>,
-        <a href="/players/3-player-3">Player 3</a>
+    = render :partial => 'teams/team', :collection => Players[0].teams.sort_by { |t| t.name }
