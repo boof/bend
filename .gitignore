@@ -1,2 +1,3 @@
 config/database.yaml
 config/session.key
+.DS_Store
