@@ -1,2 +1,15 @@
-.matches .won  {background-color: #DFD;}
-.matches .lost {background-color: #FDD;}
+.matches .upcoming {
+  font-size: 1.2em;
+  background-color: #E5ECF9;
+  color: black;
+}
+.matches .won {
+  font-size: 1.2em;
+  background-color: #DFD;
+  color: black;
+}
+.matches .lost {
+  font-size: 1.2em;
+  background-color: #FDD;
+  color: black;
+}
