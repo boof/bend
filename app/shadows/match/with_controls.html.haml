@@ -1,0 +1,7 @@
+%tr{ :class => @match.state.name }
+  %td= @match.stated_at.to_date.to_s :long
+  %td= "#{ link_to @match.away_team } - #{ link_to @match.home_team }"
+  %td{ :style => 'text-align: right;' }= @match.scoring
+  %td.last= @match.to_s self, :controls
+%tr
+  = @match.to_s self, :rounds
