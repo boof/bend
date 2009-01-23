@@ -8,4 +8,8 @@ module ApplicationHelper
     classes.at index % modulo + offset % modulo
   end
 
+  def render_control(control, *args)
+    control.render self, *args
+  end
+
 end

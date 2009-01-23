@@ -1,8 +1,7 @@
-# Filters added to this controller apply to all controllers in the application.
-# Likewise, all the methods added will be available for all controllers.
-
 class ApplicationController < ActionController::Base
   helper :all # include all helpers, all the time
+
+  AuthenticationError = Class.new ActionController::NotImplemented
 
   # See ActionController::RequestForgeryProtection for details
   # Uncomment the :secret if you're not using the cookie session store
@@ -12,20 +11,31 @@ class ApplicationController < ActionController::Base
   # Uncomment this to filter the contents of submitted sensitive data parameters
   # from your application log (in this case, all fields with names like "password"). 
   filter_parameter_logging :password
-end
 
-Players = Array.new(5) do |i|
-  name = "Player #{ i + 1 }"
-  OpenStruct.new :name => name
+  def current_player
+    @current_player ||= begin
+      Player.find_by_id session[:player_id] or
+      raise AuthenticationError, 'authorized'
+    end
+  end
+  helper_method :current_player
+
+  def rescue_action_locally(e)
+    case e
+    when AuthenticationError
+      player = Player.first ||
+          Player.create(:name => 'Flazy', :email => 'flazy@fork.de')
+      session[:player_id] = player.id
+
+      redirect_to root_path
+    else super
+    end
+  end
+  def rescue_action_in_public(e)
+    case e
+    when AuthenticationError; redirect_to root_path
+    else super
+    end
+  end
+
 end
-Teams = {
-  'Team 1' => OpenStruct.new(:name => 'Team 1', :players => [ Players[3], Players[0] ]),
-  'Team 2' => OpenStruct.new(:name => 'Team 2', :players => [ Players[1], Players[2], Players[4] ]),
-  'Team 3' => OpenStruct.new(:name => 'Team 3', :players => [ Players[3], Players[4] ]),
-  'Team 4' => OpenStruct.new(:name => 'Team 4', :players => [ Players[0], Players[1], Players[2]])
-}
-Players[0].teams = [ Teams['Team 1'], Teams['Team 4'] ]
-Players[1].teams = [ Teams['Team 2'], Teams['Team 4'] ]
-Players[2].teams = [ Teams['Team 2'], Teams['Team 4'] ]
-Players[3].teams = [ Teams['Team 1'], Teams['Team 3'] ]
-Players[4].teams = [ Teams['Team 2'], Teams['Team 3'] ]

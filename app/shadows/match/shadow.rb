@@ -1,4 +1,4 @@
-class MatchPresenter < ActiveRecord::Presenter
+class MatchShadow < Shadows::Base
 
   def controls
     @record.state.controls.map { |ctrl|

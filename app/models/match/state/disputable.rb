@@ -1,8 +1,8 @@
 class Match::State
-  class Victory < ::Match::State
+  class Disputable < ::Match::State
 
     def name
-      'victory'
+      'disputable'
     end
     def controls
       [ Control.edit_scoring, Control.delete_match, Control.accept_scoring ]

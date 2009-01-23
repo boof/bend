@@ -1,5 +1,5 @@
 class Match::State
-  class Lost < ::Match::State::Defeat
+  class Settled < ::Match::State::Victory
 
     def controls
       []

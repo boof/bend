@@ -12,45 +12,46 @@
 ActiveRecord::Schema.define(:version => 20090118143525) do
 
   create_table "assignments", :force => true do |t|
+    t.string  "type"
     t.string  "disposition"
-    t.integer "player_id"
-    t.integer "round_id"
+    t.integer "score"
+    t.integer "person_id"
+    t.integer "competition_id"
   end
 
-  create_table "matches", :force => true do |t|
-    t.integer  "away_team_id"
-    t.integer  "home_team_id"
-    t.string   "state",        :default => "Upcoming"
+  add_index "assignments", ["competition_id", "person_id"], :name => "index_assignments_on_competition_id_and_person_id", :unique => true
+  add_index "assignments", ["type"], :name => "index_assignments_on_type"
+
+  create_table "competitions", :force => true do |t|
+    t.string   "type"
+    t.string   "state",      :default => "Upcoming"
     t.datetime "stated_at"
+    t.integer  "match_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
+  add_index "competitions", ["match_id"], :name => "index_competitions_on_match_id"
+  add_index "competitions", ["type"], :name => "index_competitions_on_type"
+
   create_table "memberships", :force => true do |t|
-    t.string   "disposition"
+    t.string   "disposition", :default => "Member"
     t.integer  "player_id"
     t.integer  "team_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "players", :force => true do |t|
+  add_index "memberships", ["player_id", "team_id"], :name => "index_memberships_on_player_id_and_team_id", :unique => true
+
+  create_table "people", :force => true do |t|
+    t.string   "type"
     t.string   "name"
     t.string   "email"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "rounds", :force => true do |t|
-    t.integer "match_id"
-    t.integer "away_score"
-    t.integer "home_score"
-  end
-
-  create_table "teams", :force => true do |t|
-    t.string   "name"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
+  add_index "people", ["type"], :name => "index_people_on_type"
 
 end

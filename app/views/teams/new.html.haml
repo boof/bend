@@ -1,0 +1,6 @@
+.box
+  %h1.bottom New Team
+
+- form_for @team do |form|
+  = hidden_field_tag :step, @step.index
+  = render :partial => "#{ @step.name }", :locals => {:form => form}

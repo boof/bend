@@ -1,0 +1,6 @@
+- content_tag_for :tr, @team, :class => eo(team_counter) do
+  %td
+    - link_to @team, :title => @team.name do
+      = image_tag @team.gravatar_url(:size => '32x32'), :alt => @team.name
+  %td
+    = @team.memberships.all(:include => :player).map! { |m| m.to_s :linked_gravatar } * '&nbsp;'

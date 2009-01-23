@@ -1,0 +1,14 @@
+= form.hidden_field :name
+= form.hidden_field :email
+
+= hidden_field_tag 'team[player_ids][]', current_player.id
+%ul
+  - for player in @players
+    %li
+      = check_box_tag 'team[player_ids][]', player.id, :id => "player_id_#{ player.id }"
+      = label_tag "player_id_#{ player.id }", player
+
+  - if @players.empty?
+    No other players available.
+
+= submit_tag 'Create Team'

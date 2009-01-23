@@ -1,10 +1,9 @@
 class Assignment < ActiveRecord::Base
 
   belongs_to :person
-  belongs_to :marshal, :polymorphic => true
+  belongs_to :competition
 
-  def disposition
-    raise NotImplementedError
-  end
+  named_scope :away, :conditions => {:disposition => 'Away'}
+  named_scope :home, :conditions => {:disposition => 'Home'}
 
 end

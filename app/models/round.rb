@@ -1,17 +1,8 @@
-class Round < ActiveRecord::Base
+class Round < Competition
 
   belongs_to :match
-  has_many :assignments, :as => :marshal, :include => :person
 
-  def home_party
-    assignments.
-        select { |a| a.disposition =~ /Home/ }.
-        map! { |a| a.person }
-  end
-  def away_party
-    assignments.
-        select { |a| a.disposition =~ /Away/ }.
-        map! { |a| a.person }
-  end
+  has_many :assignments
+  has_many :people, :through => :assignment, :source => :person
 
 end

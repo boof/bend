@@ -6,6 +6,7 @@ class CreateMemberships < ActiveRecord::Migration
       t.references :team
       t.timestamps
     end
+    add_index :memberships, [:player_id, :team_id], :unique => true
   end
 
   def self.down

@@ -1,11 +1,9 @@
-class Match::Control
-  attr_reader :image_basename, :http_method, :http_action, :title
+class Assignment::Control
 
-  def initialize(title, image_basename, http_action, http_method = :get)
-    @title          = title
-    @image_basename = "#{ image_basename }.png"
-    @http_action    = :"#{ http_action }_path"
-    @http_method    = http_method
+  def initialize(title, png_basename, action, method = :get)
+    @png_basename   = "#{ png_basename }.png"
+    @action         = :"#{ http_action }_path"
+    @opts           = { :title => title, :method => method }
   end
 
   def self.new_scoring
@@ -19,6 +17,10 @@ class Match::Control
   end
   def self.accept_scoring
     new 'Accept Scoring', :check, :close_match, :put
+  end
+
+  def render(tmpl, *args)
+    tmpl.link_to tmpl.image_tag(png_basename), tmpl.send(action, *args), @opts
   end
 
 end
