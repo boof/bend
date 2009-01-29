@@ -2,7 +2,7 @@
   %h1.bottom Dashboard
 
 %h2.bottom
-  %div{ :style => 'float: right' }= link_to image_tag('add.png'), new_match_path
+  %div{ :style => 'float: right' }= link_to image_tag('add.png'), new_match_path(:return_to => root_path)
   Your Matches
   
 %table.matches
@@ -17,13 +17,13 @@
       = match.to_s :tr
 
 %h2.bottom
-  %div{ :style => 'float: right' }= link_to image_tag('add.png'), new_team_path
+  %div{ :style => 'float: right' }= link_to image_tag('add.png'), new_team_path(:return_to => root_path)
   Your Teams
 %table.teams
   %thead
     %tr
-      %th.span-7 Team
-      %th.span-17 Player
+      %th.span-1 Team
+      %th.span-23 Players
   %tbody
     - @teams.each_with_index do |team, team_counter|
       = team.to_s :tr, :locals => {:team_counter => team_counter}
